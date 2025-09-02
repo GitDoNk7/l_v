@@ -46,14 +46,14 @@ export const consultar = async (req, res) => {
     }
 
     try {
-        const veiculo = await consultarPorId(id);
+        const veiculo = await Montadora.consultarPorId(id);
         if (!veiculo) {
-            return res.status(404).json({ success: false, message: 'Veículo não encontrado' });
+            return res.status(404).json({ success: false, message: 'Montadora não encontrado' });
         }
 
         res.status(200).json({ success: true, data: veiculo });
     } catch (error) {
-        res.status(500).json({ success: false, message: 'Erro ao consultar veículo', error: error.message });
+        res.status(500).json({ success: false, message: 'Erro ao consultar montadora', error: error.message });
     }
 };
 
@@ -83,5 +83,24 @@ export const consultarTodos = async (req, res) => {
             message: 'Erro ao consultar montadora',
             error: error.message
         });
+    }
+};
+export const deletarPorId = async (req, res) => {
+    const id = parseInt(req.params.id, 10);
+
+    if (isNaN(id)) {
+        return res.status(400).json({ success: false, message: 'ID inválido' });
+    }
+
+    try {
+        const sucesso = await Montadora.deletarPorId(id);
+
+        if (!sucesso) {
+            return res.status(404).json({ success: false, message: 'Montadora não encontrada para deletar' });
+        }
+
+        res.status(200).json({ success: true, message: 'Montadora deletada com sucesso' });
+    } catch (error) {
+        res.status(500).json({ success: false, message: 'Erro ao deletar montadora', error: error.message });
     }
 };

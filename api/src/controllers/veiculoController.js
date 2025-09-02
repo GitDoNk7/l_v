@@ -75,14 +75,14 @@ export const consultarPorId = async (req, res) => {
     }
 
     try {
-        const veiculo = await consultarPorId(id); // Agora a função está definida!
+        const veiculo = await Veiculo.consultarPorId(id); 
         if (!veiculo) {
-            return res.status(404).json({ success: false, message: 'Veiculo não encontrado' });
+            return res.status(404).json({ success: false, message: 'Veículo não encontrado' });
         }
 
         res.status(200).json({ success: true, data: veiculo });
     } catch (error) {
-        res.status(500).json({ success: false, message: 'Erro ao consultar veiculo', error: error.message });
+        res.status(500).json({ success: false, message: 'Erro ao consultar veículo', error: error.message });
     }
 };
 
@@ -94,14 +94,14 @@ export const deletarPorId = async (req, res) => {
     }
 
     try {
-        const sucesso = await deletarPorId(id);
+        const sucesso = await Veiculo.deletarPorId(id);
 
         if (!sucesso) {
-            return res.status(404).json({ success: false, message: 'veiculo não encontrado para deletar' });
+            return res.status(404).json({ success: false, message: 'Veículo não encontrado para deletar' });
         }
 
-        res.status(200).json({ success: true, message: 'veiculo deletado com sucesso' });
+        res.status(200).json({ success: true, message: 'Veículo deletado com sucesso' });
     } catch (error) {
-        res.status(500).json({ success: false, message: 'Erro ao deletar veiculo', error: error.message });
+        res.status(500).json({ success: false, message: 'Erro ao deletar veículo', error: error.message });
     }
 };

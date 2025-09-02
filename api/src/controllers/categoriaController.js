@@ -94,7 +94,7 @@ export const deletarPorId = async (req, res) => {
     }
 
     try {
-        const sucesso = await deletarPorId(id);
+        const sucesso = await Categoria.deletarPorId(id);
 
         if (!sucesso) {
             return res.status(404).json({ success: false, message: 'Categoria não encontrado para deletar' });
