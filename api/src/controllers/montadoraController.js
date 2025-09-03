@@ -46,12 +46,12 @@ export const consultar = async (req, res) => {
     }
 
     try {
-        const veiculo = await Montadora.consultarPorId(id);
-        if (!veiculo) {
+        const montadora = await Montadora.consultarPorId(id);
+        if (!montadora) {
             return res.status(404).json({ success: false, message: 'Montadora não encontrado' });
         }
 
-        res.status(200).json({ success: true, data: veiculo });
+        res.status(200).json({ success: true, data: montadora });
     } catch (error) {
         res.status(500).json({ success: false, message: 'Erro ao consultar montadora', error: error.message });
     }
@@ -61,7 +61,7 @@ export const consultarTodos = async (req, res) => {
     const search = req.query.search || '';
     try {
     const montadoras = await Montadora.consultarTodos(search);
-        // Verificar se foram encontrados veículos
+        // Verificar se foram encontradas montadoras
         if (montadoras.length === 0) {
             return res.status(404).json({
                 success: false,

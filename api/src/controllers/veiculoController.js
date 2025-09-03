@@ -21,7 +21,8 @@ export const cadastrar = async (req, res) => {
             });
         }
         
-        const novoVeiculo = await Veiculo.cadastrar(veiculo);   
+
+        const novoVeiculo = await Veiculo.cadastrar(JSON.stringify(veiculo));   
         res.status(201).json({
             success: true,
             status: 201,
